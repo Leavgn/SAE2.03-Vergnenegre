@@ -9,6 +9,9 @@ Iteration1.format = function (movie) {
   html = html.replace("{{name}}", movie.name);
   html = html.replace("{{image}}", movie.image);
   return html;
+  if (movie.length == 0){
+    return "<p class='movie__unvailable'>Aucun film disponible pour le moment</p>";
+  }
 };
 
 export { Iteration1 };

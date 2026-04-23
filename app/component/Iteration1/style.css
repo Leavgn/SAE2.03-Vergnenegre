@@ -1,18 +1,21 @@
-.movie-card__affiche {
+.movie-card {
   display: flex;
+  flex-direction: column;
+ }
+
+.movie-card__affiche {
   width: 100%;
-  
+  aspect-ratio: 2/3;
   object-fit: cover;
+  border: 2px solid var(--color-gray);
+  border-radius: 2rem;
 }
 
 .movie-card__title {
-    font-size: 1.5rem;
-    color: var(--color-black);
-}
-
-.movie-card {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+  font-family: var(--ff-sans);
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--color-black);
+  padding: 0.5rem;
 }
     
