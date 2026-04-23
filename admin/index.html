@@ -7,23 +7,48 @@
     <link rel="stylesheet" href="./css/base.css" />
   </head>
   <body>
+
+   
+
+    <nav>
+            <h1>BACK OFFICE</h1>
+        </nav>
+
     <section id="log"></section>
+    
+    <section id="addMovie"></section>
 
     <script type="module">
+      import { NewMovie } from "./component/Iteration2/script.js";
+      import { DataMovie } from './data/DataMovie.js';
       import { Log } from "./component/Log/script.js";
+      
 
       window.C = {};
 
       C.start = function () {
         V.renderLog("Démarrage de l'application");
+        V.renderNewMovie("C.onClickAddMovie()");
       };
 
       window.V = {};
+
+       C.onClickAddMovie = async function () {
+            let form = document.querySelector('.addMovie__form');
+            let fd = new FormData(form);
+            let res = await DataMovie.add(fd);
+            V.renderLog(res);
+        };
 
       V.renderLog = function (txt) {
         let content = document.querySelector("#log");
         content.innerHTML = Log.format(txt);
       };
+
+       V.renderNewMovie = function (onClick) {
+            let content = document.querySelector('#addMovie');
+            content.innerHTML = NewMovie.format(onClick);
+        };
 
       C.start();
     </script>
