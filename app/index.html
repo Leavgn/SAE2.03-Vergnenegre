@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./component/Iteration1/style.css" />
   </head>
 
   <body>
@@ -14,6 +15,8 @@
 
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
+      import  {Iteration1} from "./component/Iteration1/script.js";
+      import {DataMovie} from "./data/DataMovie.js";
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -26,9 +29,13 @@
         );
       };
 
-      C.start = function () {
-        V.renderNavBar("C.handlerAbout()");
+      C.start = async function () {
+      V.renderNavBar("C.handlerAbout()");
+      let movies = await DataMovie.requestMovies();
+      V.renderIteration1(movies);
       };
+
+   
 
       // Vue (contient tout ce qui est relatif à l'affichage)
       window.V = {};
@@ -44,6 +51,17 @@
         let header = document.querySelector("#header");
         header.innerHTML = NavBar.format(hAbout);
       };
+
+     V.renderIteration1 = function (Movie) {
+      let content = document.querySelector("#content");
+      let html = "";
+      for (let i = 0; i < Movie.length; i++) {
+      html += Iteration1.format(Movie[i]);
+      }
+      content.innerHTML = html;
+};
+
+     
 
       C.start(); // Démarre l'application
     </script>

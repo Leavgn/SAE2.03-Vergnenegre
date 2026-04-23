@@ -3,5 +3,7 @@
 @import "./reset.css" layer(reset);
 @import "./variables.css" layer(variables);
 @import "./utilities.css" layer(utilities);
+@import "./layout.css" layer(utilities);
 
 @import "../component/NavBar/style.css" layer(components);
+@import "../component/Iteration1/style.css" layer(components);
