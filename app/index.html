@@ -16,7 +16,9 @@
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
       import  {Iteration1} from "./component/Iteration1/script.js";
+      import {MovieDetail} from "./component/Iteration3/script.js";
       import {DataMovie} from "./data/DataMovie.js";
+      
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -29,10 +31,20 @@
         );
       };
 
+      C.handlerHome = async function () {
+        let movies = await DataMovie.requestMovies();
+        V.renderIteration1(movies);
+      };
+
       C.start = async function () {
-      V.renderNavBar("C.handlerAbout()");
+      V.renderNavBar("C.handlerAbout()", "C.handlerHome()");
       let movies = await DataMovie.requestMovies();
       V.renderIteration1(movies);
+      };
+
+      C.handlerDetail = async function (id) {
+        let movie = await DataMovie.requestMovieDetails(id);
+        V.renderMovieDetail(movie);
       };
 
    
@@ -47,9 +59,9 @@
        * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
        * formaté par le composant NavBar.
        */
-      V.renderNavBar = function (hAbout) {
+      V.renderNavBar = function (hAbout, hHome) {
         let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hAbout);
+        header.innerHTML = NavBar.format(hAbout, hHome);
       };
 
      V.renderIteration1 = function (Movie) {
@@ -59,7 +71,12 @@
       html += Iteration1.format(Movie[i]);
       }
       content.innerHTML = html;
-};
+      };
+
+       V.renderMovieDetail = function (movie) {
+        let content = document.querySelector("#content");
+        content.innerHTML = MovieDetail.format(movie);
+      };
 
      
 

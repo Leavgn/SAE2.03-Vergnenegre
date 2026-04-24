@@ -73,3 +73,12 @@ function addMovieController(){
         return false;
     }
 }
+
+function readMovieDetailController() {
+    if ( isset($_REQUEST['id'])==false || empty($_REQUEST['id'])==true ) {
+        return false;
+    }
+    $id = $_REQUEST['id'];
+    $movie = getMovieDetail($id);
+    return $movie;
+}
