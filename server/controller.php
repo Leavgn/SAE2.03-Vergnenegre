@@ -29,22 +29,22 @@ function readMoviesController(){
 function addMovieController(){
 
    
-    if ( isset($_REQUEST['titre'])==false || empty($_REQUEST['titre'])==true ){
+    if ( isset($_REQUEST['name'])==false || empty($_REQUEST['name'])==true ){
         return false;
     }
-    if ( isset($_REQUEST['realisateur'])==false || empty($_REQUEST['realisateur'])==true ){
+    if ( isset($_REQUEST['director'])==false || empty($_REQUEST['director'])==true ){
         return false;
     }
-    if ( isset($_REQUEST['annee'])==false || empty($_REQUEST['annee'])==true ){
+    if ( isset($_REQUEST['year'])==false || empty($_REQUEST['year'])==true ){
         return false;
     }
-    if ( isset($_REQUEST['duree'])==false || empty($_REQUEST['duree'])==true ){
+    if ( isset($_REQUEST['length'])==false || empty($_REQUEST['length'])==true ){
         return false;
     }
     if ( isset($_REQUEST['description'])==false || empty($_REQUEST['description'])==true ){
         return false;
     }
-    if ( isset($_REQUEST['categorie'])==false || empty($_REQUEST['categorie'])==true ){
+    if ( isset($_REQUEST['id_category'])==false || empty($_REQUEST['id_category'])==true ){
         return false;
     }
     if ( isset($_REQUEST['image'])==false || empty($_REQUEST['image'])==true ){
@@ -55,17 +55,17 @@ function addMovieController(){
     }
 
    
-    $titre        = $_REQUEST['titre'];
-    $realisateur    = $_REQUEST['realisateur'];
-    $annee        = $_REQUEST['annee'];
-    $duree      = $_REQUEST['duree'];
+    $name        = $_REQUEST['name'];
+    $director    = $_REQUEST['director'];
+    $year        = $_REQUEST['year'];
+    $length      = $_REQUEST['length'];
     $description = $_REQUEST['description'];
-    $categorie   = $_REQUEST['categorie'];
+    $id_category   = $_REQUEST['id_category'];
     $image       = $_REQUEST['image'];
     $trailer     = $_REQUEST['trailer'] ?? '';
     $min_age     = $_REQUEST['min_age'];
 
-    $ok = addMovie($titre, $realisateur, $annee, $duree, $description, $categorie, $image, $trailer, $min_age);
+    $ok = addMovie($name, $director, $year, $length, $description, $id_category, $image, $trailer, $min_age);
 
     if ($ok != 0){
         return "Le film a été ajouté avec succès.";
