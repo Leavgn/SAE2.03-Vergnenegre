@@ -50,6 +50,9 @@ function addMovieController(){
     if ( isset($_REQUEST['image'])==false || empty($_REQUEST['image'])==true ){
         return false;
     }
+    if ( isset($_REQUEST['trailer'])==false || empty($_REQUEST['trailer'])==true ){
+        return false;
+    }
     if ( isset($_REQUEST['min_age'])==false || empty($_REQUEST['min_age'])==true ){
         return false;
     }
