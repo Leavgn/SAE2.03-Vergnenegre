@@ -1,4 +1,4 @@
-let templateFile = await fetch('./component/Iteration2/template.html');
+let templateFile = await fetch('./component/AddMovie/template.html');
 let template = await templateFile.text();
 
 let NewMovie = {};

@@ -1,9 +1,9 @@
-let templateFile = await fetch("./component/Iteration1/template.html");
+let templateFile = await fetch("./component/MovieList/template.html");
 let template = await templateFile.text();
 
-let Iteration1 = {};
+let MovieList = {};
 
-Iteration1.format = function (movie) {
+MovieList.format = function (movie) {
   let html = template;
   html = html.replace("{{name}}", movie.name);
   html = html.replace("{{name}}", movie.name);
@@ -14,4 +14,4 @@ Iteration1.format = function (movie) {
   }
 };
 
-export { Iteration1 };
+export { MovieList };

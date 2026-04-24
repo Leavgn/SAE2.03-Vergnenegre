@@ -15,7 +15,7 @@
 
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
-      import  {Iteration1} from "./component/Iteration1/script.js";
+      import  {MovieList} from "./component/MovieList/script.js";
       import {MovieDetail} from "./component/Iteration3/script.js";
       import {DataMovie} from "./data/DataMovie.js";
       
@@ -68,7 +68,7 @@
       let content = document.querySelector("#content");
       let html = "";
       for (let i = 0; i < Movie.length; i++) {
-      html += Iteration1.format(Movie[i]);
+      html += MovieList.format(Movie[i]);
       }
       content.innerHTML = html;
       };
