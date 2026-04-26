@@ -5,13 +5,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
     
   </head>
 
   <body>
     <header id="header"></header>
 
-    <section id="content"></section>
+    <section id="content" class="grid-view"></section>
+  
 
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
@@ -33,13 +35,13 @@
 
       C.handlerHome = async function () {
         let movies = await DataMovie.requestMovies();
-        V.renderIteration1(movies);
+        V.renderMovieList(movies);
       };
 
       C.start = async function () {
       V.renderNavBar("C.handlerAbout()", "C.handlerHome()");
       let movies = await DataMovie.requestMovies();
-      V.renderIteration1(movies);
+      V.renderMovieList(movies);
       };
 
       C.handlerDetail = async function (id) {
@@ -64,8 +66,9 @@
         header.innerHTML = NavBar.format(hAbout, hHome);
       };
 
-     V.renderIteration1 = function (Movie) {
+     V.renderMovieList = function (Movie) {
       let content = document.querySelector("#content");
+      content.className = "grid-view"; 
       let html = "";
       for (let i = 0; i < Movie.length; i++) {
       html += MovieList.format(Movie[i]);
@@ -75,6 +78,7 @@
 
        V.renderMovieDetail = function (movie) {
         let content = document.querySelector("#content");
+        content.className = "detail-view"; 
         content.innerHTML = MovieDetail.format(movie);
       };
 
