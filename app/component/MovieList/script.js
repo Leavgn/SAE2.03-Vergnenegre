@@ -8,6 +8,7 @@ MovieList.format = function (movie) {
   html = html.replace("{{name}}", movie.name);
   html = html.replace("{{name}}", movie.name);
   html = html.replace("{{image}}", movie.image);
+  html = html.replace("{{id}}", movie.id); 
   return html;
   if (movie.length == 0){
     return "<p class='movie__unvailable'>Aucun film disponible pour le moment</p>";

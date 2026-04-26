@@ -34,7 +34,7 @@ function getAllMovies(){
 }
 
 function addMovie($name, $director, $year, $length, $description, $id_category, $image, $trailer, $min_age) {
-    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME . ";charset=utf8", DBLOGIN, DBPWD);
     $sql = "INSERT INTO Movie (name, director, year, length, description, id_category, image, trailer, min_age)
             VALUES (:name, :director, :year, :length, :description, :id_category, :image, :trailer, :min_age)";
     $stmt = $cnx->prepare($sql);
@@ -53,7 +53,7 @@ function addMovie($name, $director, $year, $length, $description, $id_category, 
 }
 
 function getMovieDetail($id) {
-    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME . ";charset=utf8", DBLOGIN, DBPWD);
     $sql = "SELECT Movie.id, Movie.name, Movie.year, Movie.length, Movie.description,
                    Movie.director, Movie.image, Movie.trailer, Movie.min_age,
                    Category.name as category
