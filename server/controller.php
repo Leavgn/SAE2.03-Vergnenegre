@@ -27,7 +27,7 @@ function readMoviesController(){
     foreach ($movies as $movie) {
         $categories[$movie->category][] = $movie;
     }
-    return $categories;
+    return $movies;
 }
 
 function addMovieController(){

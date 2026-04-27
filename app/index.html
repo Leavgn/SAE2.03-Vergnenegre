@@ -40,12 +40,11 @@
       };
 
       C.start = async function () {
-       let movies = await DataMovie.requestMovies();
-       let categories = await DataMovie.requestMoviesByCategory();
-       V.renderNavBar("C.handlerAbout()", "C.handlerHome()", categories);
-       V.renderMovieList(movies);
-       V.renderMovieByCategory(categories);
-      };
+    let movies = await DataMovie.requestMovies();
+    let categories = await DataMovie.requestMoviesByCategory();
+    V.renderNavBar("C.handlerAbout()", "C.handlerHome()", categories);
+    V.renderMovieList(movies);
+};
 
       C.handlerDetail = async function (id) {
         let movie = await DataMovie.requestMovieDetails(id);
@@ -92,6 +91,16 @@
         content.className = "detail-view"; 
         content.innerHTML = MovieDetail.format(movie);
       };
+
+      V.renderMovieByCategory = function (categories) {
+    let content = document.querySelector("#content");
+    content.className = "grid-view";
+    let html = "";
+    for (const [categoryName, movies] of Object.entries(categories)) {
+        html += MovieCategory.format(categoryName, movies);
+    }
+    content.innerHTML = html;
+};
 
 
      
