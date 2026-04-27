@@ -7,6 +7,8 @@
   background-color: var(--color-bg);
 
   .navbar__item {
+    display: flex;
+    align-items: center;
     --_offset: 0.2rem;
     padding: 0.5rem 1rem;
     text-decoration: underline;
@@ -17,5 +19,10 @@
     &:hover {
       --_offset: 0.5rem;
     }
+  }
+
+  .navbar__list{
+    display: flex;
+    flex-direction: row;
   }
 }

@@ -20,6 +20,7 @@
   font-family: var(--ff-sans);
   gap: 0.5rem;
   margin-left: 2rem;
+  
 }
 
 .movieDetail__title {
@@ -29,14 +30,32 @@
   margin-bottom: 1rem;
 }
 
+.movieDetail__year{
+  border-bottom : 1px solid var(--color-gray-light);
+}
+
+.movieDetail__length{
+  border-bottom : 1px solid var(--color-gray-light);
+}
+
+.movieDetail__age{
+  border-bottom : 1px solid var(--color-gray-light);
+}
+
+.movieDetail__category{
+  border-bottom : 1px solid var(--color-gray-light);
+}
+
 
 
 .movieDetail__description {
   margin-bottom: 2rem;
+  border-bottom : 1px solid var(--color-gray-light);
 }
 
 .movieDetail__director {
-  font-style: italic; 
+  font-style: italic;
+  border-bottom : 1px solid var(--color-gray-light);
 }
 
 .movieDetail__trailer iframe {
