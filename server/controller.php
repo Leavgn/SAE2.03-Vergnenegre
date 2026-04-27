@@ -23,7 +23,11 @@ require("model.php");
 
 function readMoviesController(){
     $movies = getAllMovies();
-    return $movies;
+    $categories = [];
+    foreach ($movies as $movie) {
+        $categories[$movie->category][] = $movie;
+    }
+    return $categories;
 }
 
 function addMovieController(){
@@ -84,4 +88,13 @@ function readMovieDetailController() {
     $id = $_REQUEST['id'];
     $movie = getMovieDetail($id);
     return $movie;
+}
+
+function readMoviesByCategoryController(){
+    $movies = getAllMovies();
+    $categories = [];
+    foreach ($movies as $movie) {
+        $categories[$movie->category][] = $movie;
+    }
+    return $categories;
 }

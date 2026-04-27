@@ -19,6 +19,7 @@
       import { NavBar } from "./component/NavBar/script.js";
       import  {MovieList} from "./component/MovieList/script.js";
       import {MovieDetail} from "./component/Iteration3/script.js";
+      import { MovieCategory } from "./component/MovieCategory/script.js";
       import {DataMovie} from "./data/DataMovie.js";
       
 
@@ -39,15 +40,25 @@
       };
 
       C.start = async function () {
-      V.renderNavBar("C.handlerAbout()", "C.handlerHome()");
-      let movies = await DataMovie.requestMovies();
-      V.renderMovieList(movies);
+       let movies = await DataMovie.requestMovies();
+       let categories = await DataMovie.requestMoviesByCategory();
+       V.renderNavBar("C.handlerAbout()", "C.handlerHome()", categories);
+       V.renderMovieList(movies);
+       V.renderMovieByCategory(categories);
       };
 
       C.handlerDetail = async function (id) {
         let movie = await DataMovie.requestMovieDetails(id);
         V.renderMovieDetail(movie);
       };
+
+      C.handlerCategory = async function (categoryName) {
+        let categories = await DataMovie.requestMoviesByCategory();
+        let movies = categories[categoryName];
+        V.renderMovieList(movies);
+        };
+
+     
 
    
 
@@ -61,18 +72,18 @@
        * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
        * formaté par le composant NavBar.
        */
-      V.renderNavBar = function (hAbout, hHome) {
+      V.renderNavBar = function (hAbout, hHome, categories) {
         let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hAbout, hHome);
+        header.innerHTML = NavBar.format(hAbout, hHome, categories);
       };
 
-     V.renderMovieList = function (Movie) {
-      let content = document.querySelector("#content");
-      content.className = "grid-view"; 
-      let html = "";
-      for (let i = 0; i < Movie.length; i++) {
-      html += MovieList.format(Movie[i]);
-      }
+     V.renderMovieList = function (movies) {
+       let content = document.querySelector("#content");
+       content.className = "grid-view";
+       let html = "";
+       for (const movie of movies) {
+       html += MovieList.format(movie);
+       }
       content.innerHTML = html;
       };
 
@@ -81,6 +92,7 @@
         content.className = "detail-view"; 
         content.innerHTML = MovieDetail.format(movie);
       };
+
 
      
 

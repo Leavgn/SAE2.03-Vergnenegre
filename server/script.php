@@ -66,9 +66,13 @@ if ( isset($_REQUEST['todo']) ){
       $data = addMovieController();  
      break;
 
-      case 'readMovieDetail':
-        $data = readMovieDetailController();
-        break;
+    case 'readMovieDetail':
+      $data = readMovieDetailController();
+      break;
+
+    case 'readMoviesByCategory':
+      $data = readMoviesByCategoryController();
+      break;
 
 
     default: // il y a un paramètre todo mais sa valeur n'est pas reconnue/supportée
