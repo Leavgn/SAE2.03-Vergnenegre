@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
   <head>
     <title>SAE2.03 APP</title>
@@ -6,22 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/base.css" />
     <link rel="stylesheet" href="../css/layout.css" />
-    
   </head>
 
   <body>
     <header id="header"></header>
 
     <section id="content" class="grid-view"></section>
-  
 
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
-      import  {MovieList} from "./component/MovieList/script.js";
-      import {MovieDetail} from "./component/Iteration3/script.js";
+      import { MovieList } from "./component/MovieList/script.js";
+      import { MovieDetail } from "./component/Iteration3/script.js";
       import { MovieCategory } from "./component/MovieCategory/script.js";
-      import {DataMovie} from "./data/DataMovie.js";
-      
+      import { DataMovie } from "./data/DataMovie.js";
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -30,7 +27,7 @@
 
       C.handlerAbout = function () {
         alert(
-          "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
+          "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !",
         );
       };
 
@@ -40,11 +37,11 @@
       };
 
       C.start = async function () {
-    let movies = await DataMovie.requestMovies();
-    let categories = await DataMovie.requestMoviesByCategory();
-    V.renderNavBar("C.handlerAbout()", "C.handlerHome()", categories);
-    V.renderMovieList(movies);
-};
+        let movies = await DataMovie.requestMovies();
+        let categories = await DataMovie.requestMoviesByCategory();
+        V.renderNavBar("C.handlerAbout()", "C.handlerHome()", categories);
+        V.renderMovieList(movies);
+      };
 
       C.handlerDetail = async function (id) {
         let movie = await DataMovie.requestMovieDetails(id);
@@ -55,11 +52,7 @@
         let categories = await DataMovie.requestMoviesByCategory();
         let movies = categories[categoryName];
         V.renderMovieList(movies);
-        };
-
-     
-
-   
+      };
 
       // Vue (contient tout ce qui est relatif à l'affichage)
       window.V = {};
@@ -76,37 +69,33 @@
         header.innerHTML = NavBar.format(hAbout, hHome, categories);
       };
 
-     V.renderMovieList = function (movies) {
-       let content = document.querySelector("#content");
-       content.className = "grid-view";
-       let html = "";
-       for (const movie of movies) {
-       html += MovieList.format(movie);
-       }
-      content.innerHTML = html;
+      V.renderMovieList = function (movies) {
+        let content = document.querySelector("#content");
+        content.className = "grid-view";
+        let html = "";
+        for (const movie of movies) {
+          html += MovieList.format(movie);
+        }
+        content.innerHTML = html;
       };
 
-       V.renderMovieDetail = function (movie) {
+      V.renderMovieDetail = function (movie) {
         let content = document.querySelector("#content");
-        content.className = "detail-view"; 
+        content.className = "detail-view";
         content.innerHTML = MovieDetail.format(movie);
       };
 
       V.renderMovieByCategory = function (categories) {
-    let content = document.querySelector("#content");
-    content.className = "grid-view";
-    let html = "";
-    for (const [categoryName, movies] of Object.entries(categories)) {
-        html += MovieCategory.format(categoryName, movies);
-    }
-    content.innerHTML = html;
-};
-
-
-     
+        let content = document.querySelector("#content");
+        content.className = "grid-view";
+        let html = "";
+        for (const [categoryName, movies] of Object.entries(categories)) {
+          html += MovieCategory.format(categoryName, movies);
+        }
+        content.innerHTML = html;
+      };
 
       C.start(); // Démarre l'application
     </script>
   </body>
 </html>
-
