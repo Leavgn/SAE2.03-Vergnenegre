@@ -98,3 +98,7 @@ function readMoviesByCategoryController(){
     }
     return $categories;
 }
+
+function readCategoriesController() {
+    return getCategories();
+}

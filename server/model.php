@@ -70,3 +70,10 @@ function getMovieDetail($id) {
     return $res;
 }
 
+function getCategories() {
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT * FROM Category ORDER BY name";
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}

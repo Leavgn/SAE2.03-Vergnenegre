@@ -48,7 +48,10 @@
        V.renderNewMovie = function (onClick) {
             let content = document.querySelector('#addMovie');
             content.innerHTML = NewMovie.format(onClick);
+            NewMovie.fillCategories();
         };
+
+
 
       C.start();
     </script>
