@@ -3,7 +3,6 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-
   transition: transform 0.2s;
 }
 
@@ -21,7 +20,7 @@
 }
 
 .profile:hover .profile__avatar {
-  border: 3px solid white;
+  border: 3px solid transparent;
 }
 
 .profile__name {
