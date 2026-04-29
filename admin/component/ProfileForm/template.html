@@ -1,0 +1,19 @@
+<div class="profile-form">
+  <h3 class="profile-form__title">Ajouter un profil</h3>
+  <form class="profile-form__form">
+    <input required type="text" name="name" placeholder="Nom du profil" />
+    <input type="text" name="avatar" placeholder="Nom du fichier avatar" />
+    <select name="min_age">
+      <option value="0">Tous publics</option>
+      <option value="12">12 et +</option>
+      <option value="16">16 et +</option>
+      <option value="18">18 et +</option>
+    </select>
+    <input
+      onclick="{{onClick}}"
+      type="button"
+      class="profile-form__button"
+      value="Ajouter le profil"
+    />
+  </form>
+</div>

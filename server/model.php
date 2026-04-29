@@ -77,3 +77,16 @@ function getCategories() {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
+
+function addProfile($name, $avatar, $min_age) {
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME.";charset=utf8", DBLOGIN, DBPWD);
+    $sql = "INSERT INTO Profile (name, avatar, min_age) 
+            VALUES (:name, :avatar, :min_age)";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':avatar', $avatar);
+    $stmt->bindParam(':min_age', $min_age);
+    $stmt->execute();
+    $res = $stmt->rowCount();
+    return $res;
+}

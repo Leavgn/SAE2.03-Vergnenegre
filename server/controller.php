@@ -102,3 +102,24 @@ function readMoviesByCategoryController(){
 function readCategoriesController() {
     return getCategories();
 }
+
+function addProfileController() {
+    if (isset($_REQUEST['name']) == false || empty($_REQUEST['name']) == true) {
+        return false;
+    }
+    if (isset($_REQUEST['min_age']) == false) {
+    return false;
+}
+
+    $name    = $_REQUEST['name'];
+    $avatar  = $_REQUEST['avatar'] ?? '';
+    $min_age = $_REQUEST['min_age'];
+
+    $ok = addProfile($name, $avatar, $min_age);
+
+    if ($ok != 0) {
+        return "Le profil a été ajouté avec succès.";
+    } else {
+        return false;
+    }
+}
