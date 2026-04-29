@@ -11,3 +11,13 @@
   align-items: center;
   padding: 2rem;
 }
+
+.profiles-view {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 2rem;
+}

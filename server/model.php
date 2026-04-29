@@ -90,3 +90,11 @@ function addProfile($name, $avatar, $min_age) {
     $res = $stmt->rowCount();
     return $res;
 }
+
+function getProfiles() {
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME.";charset=utf8", DBLOGIN, DBPWD);
+    $sql = "SELECT * FROM Profile ORDER BY name";
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}

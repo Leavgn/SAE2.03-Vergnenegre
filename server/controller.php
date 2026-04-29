@@ -123,3 +123,7 @@ function addProfileController() {
         return false;
     }
 }
+
+function readProfilesController() {
+    return getProfiles();
+}

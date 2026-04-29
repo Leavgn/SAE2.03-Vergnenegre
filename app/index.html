@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <header id="header"></header>
+    <header id="header" hidden></header>
 
     <section id="content" class="grid-view"></section>
 
@@ -18,11 +18,15 @@
       import { MovieList } from "./component/MovieList/script.js";
       import { MovieDetail } from "./component/Iteration3/script.js";
       import { MovieCategory } from "./component/MovieCategory/script.js";
+      import { Profile } from "./component/Profile/script.js";
+      import { DataProfile } from "./data/DataProfile.js";
       import { DataMovie } from "./data/DataMovie.js";
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
       // Une fois l'application terminée, on pourrait remettre let C.
+      let activeProfile = null;
+
       window.C = {};
 
       C.handlerAbout = function () {
@@ -39,8 +43,15 @@
       C.start = async function () {
         let movies = await DataMovie.requestMovies();
         let categories = await DataMovie.requestMoviesByCategory();
-        V.renderNavBar("C.handlerAbout()", "C.handlerHome()", categories);
+        V.renderNavBar(
+          "C.handlerAbout()",
+          "C.handlerHome()",
+          categories,
+          "C.handlerProfiles()",
+        );
         V.renderMovieList(movies);
+        let profiles = await DataProfile.read();
+        V.renderProfiles(profiles);
       };
 
       C.handlerDetail = async function (id) {
@@ -54,6 +65,17 @@
         V.renderMovieList(movies);
       };
 
+      C.handlerSelectProfile = async function (id) {
+        activeProfile = id;
+        let movies = await DataMovie.requestMovies();
+        V.renderMovieList(movies);
+      };
+
+      C.handlerProfiles = async function () {
+        let profiles = await DataProfile.read();
+        V.renderProfiles(profiles);
+      };
+
       // Vue (contient tout ce qui est relatif à l'affichage)
       window.V = {};
 
@@ -64,12 +86,13 @@
        * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
        * formaté par le composant NavBar.
        */
-      V.renderNavBar = function (hAbout, hHome, categories) {
+      V.renderNavBar = function (hAbout, hHome, categories, hProfile) {
         let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hAbout, hHome, categories);
+        header.innerHTML = NavBar.format(hAbout, hHome, categories, hProfile);
       };
 
       V.renderMovieList = function (movies) {
+        document.querySelector("#header").hidden = false;
         let content = document.querySelector("#content");
         content.className = "grid-view";
         let html = "";
@@ -91,6 +114,17 @@
         let html = "";
         for (const [categoryName, movies] of Object.entries(categories)) {
           html += MovieCategory.format(categoryName, movies);
+        }
+        content.innerHTML = html;
+      };
+
+      V.renderProfiles = function (profiles) {
+        document.querySelector("#header").hidden = true;
+        let content = document.querySelector("#content");
+        content.className = "profiles-view";
+        let html = "";
+        for (const profile of profiles) {
+          html += Profile.format(profile);
         }
         content.innerHTML = html;
       };

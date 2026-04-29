@@ -3,7 +3,7 @@ let template = await templateFile.text();
 
 let NavBar = {};
 
-NavBar.format = function (hAbout, hHome, categories) {
+NavBar.format = function (hAbout, hHome, categories, hProfile) {
   let html = template;
   let categoriesHtml = "";
   for (let categoryName in categories) {
@@ -12,6 +12,7 @@ NavBar.format = function (hAbout, hHome, categories) {
   html = html.replace("{{hAbout}}", hAbout);
   html = html.replace("{{hHome}}", hHome);
   html = html.replace("{{categories}}", categoriesHtml);
+  html = html.replace("{{hProfile}}", hProfile);
   return html;
 };
 

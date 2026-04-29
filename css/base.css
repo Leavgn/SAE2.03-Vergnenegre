@@ -8,5 +8,5 @@
 @import "../app/component/NavBar/style.css" layer(components);
 @import "../app/component/MovieList/style.css" layer(components);
 @import "../app/component/Iteration3/style.css" layer(components);
+@import "../app/component/Profile/style.css" layer(components);
 @import "../admin/component/Log/style.css" layer(components);
-
