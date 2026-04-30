@@ -1,0 +1,42 @@
+.landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 2rem;
+}
+
+.landing__title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.landing__links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.landing__card {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: hsl(0, 50%, 50%);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+}
+
+.landing__card:hover {
+  background-color: hsl(0, 50%, 40%);
+  transform: translateY(-2px);
+}
+
+.landing__card:active {
+  transform: translateY(0);
+}
