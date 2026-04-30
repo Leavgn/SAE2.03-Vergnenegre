@@ -36,7 +36,3 @@
   background-color: hsl(0, 50%, 40%);
   transform: translateY(-2px);
 }
-
-.landing__card:active {
-  transform: translateY(0);
-}
