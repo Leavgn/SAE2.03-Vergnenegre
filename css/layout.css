@@ -7,7 +7,7 @@
 }
 
 /* DESKTOP */
-@media (min-width: 40rem) {
+@media (width > 40rem) {
   .grid-view {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;

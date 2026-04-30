@@ -33,7 +33,7 @@
   width: 100%;
 }
 
-@media (width: 40rem) {
+@media (width > 40rem) {
   .movie-card__title {
     font-size: 1rem;
     background: none;
