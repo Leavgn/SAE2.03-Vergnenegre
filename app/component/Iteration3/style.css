@@ -69,6 +69,7 @@
   }
 
   .movieDetail__info {
+    min-width: 0;
     margin-left: 2rem;
   }
 }
