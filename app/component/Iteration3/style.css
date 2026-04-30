@@ -1,13 +1,13 @@
 .movieDetail {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 2rem;
+  padding: 2rem;
 }
 
 .movieDetail__img {
-  width: 100%;
+  max-width: 400px;
   object-fit: cover;
   border-radius: 2rem;
 }
@@ -17,6 +17,7 @@
   flex-direction: column;
   font-family: var(--ff-sans);
   gap: 0.5rem;
+  margin-left: 2rem;
 }
 
 .movieDetail__title {
@@ -26,21 +27,30 @@
   margin-bottom: 1rem;
 }
 
-.movieDetail__year,
-.movieDetail__length,
-.movieDetail__age,
-.movieDetail__category,
-.movieDetail__description,
-.movieDetail__director {
+.movieDetail__year {
+  border-bottom: 1px solid var(--color-gray-light);
+}
+
+.movieDetail__length {
+  border-bottom: 1px solid var(--color-gray-light);
+}
+
+.movieDetail__age {
+  border-bottom: 1px solid var(--color-gray-light);
+}
+
+.movieDetail__category {
   border-bottom: 1px solid var(--color-gray-light);
 }
 
 .movieDetail__description {
   margin-bottom: 2rem;
+  border-bottom: 1px solid var(--color-gray-light);
 }
 
 .movieDetail__director {
   font-style: italic;
+  border-bottom: 1px solid var(--color-gray-light);
 }
 
 .movieDetail__trailer iframe {
@@ -48,22 +58,4 @@
   border-radius: 2rem;
   width: 100%;
   aspect-ratio: 16/9;
-}
-
-@media (width: 40rem) {
-  .movieDetail {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 2rem;
-    padding: 2rem;
-  }
-
-  .movieDetail__img {
-    width: 400px;
-    flex-shrink: 0;
-  }
-
-  .movieDetail__info {
-    margin-left: 2rem;
-  }
 }
