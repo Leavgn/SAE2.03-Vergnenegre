@@ -1,50 +1,68 @@
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 1rem 3rem;
+  padding: 1rem;
   color: var(--color-fg);
   background-color: var(--color-bg);
+}
 
-  .navbar__item {
-    display: flex;
-    align-items: center;
-    --_offset: 0.2rem;
+.navbar .navbar__item {
+  display: flex;
+  align-items: center;
+  --_offset: 0.2rem;
+  padding: 0.3rem 0.5rem;
+  text-decoration: underline;
+  text-decoration-thickness: 0.1rem;
+  text-underline-offset: var(--_offset);
+  cursor: pointer;
+  transition: text-underline-offset 0.2s ease-in-out;
+}
+
+.navbar .navbar__item:hover {
+  --_offset: 0.5rem;
+}
+
+.navbar .navbar__list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.navbar .navbar__dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.navbar .navbar__dropdown-list {
+  display: none;
+  position: absolute;
+  background-color: var(--color-bg);
+  list-style: none;
+  padding: 0.5rem;
+  min-width: 150px;
+  top: 100%;
+  left: 0;
+}
+
+.navbar .navbar__dropdown:hover .navbar__dropdown-list {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 40rem) {
+  .navbar {
+    justify-content: space-between;
+    padding: 1rem 3rem;
+  }
+
+  .navbar .navbar__item {
     padding: 0.5rem 1rem;
-    text-decoration: underline;
-    text-decoration-thickness: 0.1rem;
-    text-underline-offset: var(--_offset);
-    cursor: pointer;
-    transition: text-underline-offset 0.2s ease-in-out;
-    &:hover {
-      --_offset: 0.5rem;
-    }
   }
 
-  .navbar__list {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .navbar__dropdown {
-    position: relative;
-    cursor: pointer;
-  }
-
-  .navbar__dropdown-list {
-    display: none;
-    position: absolute;
-    background-color: var(--color-bg);
-    list-style: none;
-    text-decoration: none;
-    padding: 0.5rem;
-    min-width: 150px;
-    top: 100%;
-    left: 0;
-  }
-
-  .navbar__dropdown:hover .navbar__dropdown-list {
-    display: flex;
-    flex-direction: column;
+  .navbar .navbar__list {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
   }
 }

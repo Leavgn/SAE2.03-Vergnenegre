@@ -1,21 +1,49 @@
+/* MOBILE par défaut */
 .movie-card {
   display: flex;
   flex-direction: column;
- }
+  position: relative;
+}
 
 .movie-card__affiche {
   width: 100%;
-  aspect-ratio: 2/3;
+  aspect-ratio: 3/4;
   object-fit: cover;
-  border: 2px solid var(--color-gray);
-  border-radius: 2rem;
+  border: 2px solid var(--color-white);
+  border-radius: 0.5rem;
 }
 
 .movie-card__title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   font-family: var(--ff-sans);
-  text-align: center;
-  font-size: 1.5rem;
-  color: var(--color-black);
+  font-size: 0.7rem;
   padding: 0.5rem;
+  background: linear-gradient(transparent, var(--color-black));
+  color: var(--color-white);
+  border-radius: 0.5rem;
+  text-align: left;
 }
-    
+
+.movie-card__name {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+/* DESKTOP */
+@media (width: 40rem) {
+  .movie-card__title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 1rem;
+    background: none;
+    color: var(--color-white);
+    text-align: left;
+    padding: 0.5rem;
+  }
+}

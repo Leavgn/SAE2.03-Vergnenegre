@@ -1,8 +1,18 @@
+/* MOBILE par défaut */
 .grid-view {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1rem;
-  padding: 2rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+/* DESKTOP */
+@media (min-width: 40rem) {
+  .grid-view {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    padding: 2rem;
+  }
 }
 
 .detail-view {
