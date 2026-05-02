@@ -20,9 +20,11 @@
  */
 require("model.php");
 
-
+/*Cette fonction permet de récupérer tous les films filtrés par âge du profil*/ 
 function readMoviesController(){
-    $movies = getAllMovies();
+/*Si aucun age n'est spécifié (age = 0) alors tous les films sont renvoyés*/ 
+    $age = isset($_REQUEST['age']) ? $_REQUEST['age'] : 0;
+    $movies = getAllMovies($age);
     $categories = [];
     foreach ($movies as $movie) {
         $categories[$movie->category][] = $movie;
@@ -91,7 +93,8 @@ function readMovieDetailController() {
 }
 
 function readMoviesByCategoryController(){
-    $movies = getAllMovies();
+    $age = isset($_REQUEST['age']) ? $_REQUEST['age'] : 0;
+    $movies = getAllMovies($age);
     $categories = [];
     foreach ($movies as $movie) {
         $categories[$movie->category][] = $movie;

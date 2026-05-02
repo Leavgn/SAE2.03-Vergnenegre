@@ -47,22 +47,19 @@
     top: 100%;
     left: 0;
   }
+}
 
-  /*
-  .navbar__dropdown:hover .navbar__dropdown-list {
-    display: flex;
-    flex-direction: column;
+.navbar .navbar__dropdown:hover .navbar__dropdown-list {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (width > 40rem) {
+  .navbar__list {
+    padding: 2rem;
   }
-    */
 
-  @media (width > 40rem) {
-    .navbar__list {
-      padding: 2rem;
-    }
-
-    .navbar__dropdown:hover .navbar__dropdown-list {
-      display: flex;
-      flex-direction: column;
-    }
+  .navbar__dropdown:hover .navbar__dropdown-list {
+    display: block;
   }
 }

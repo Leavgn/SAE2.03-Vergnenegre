@@ -36,12 +36,14 @@
       };
 
       C.handlerHome = async function () {
-        let movies = await DataMovie.requestMovies();
+        let age = activeProfile ? activeProfile.min_age : 0;
+        let movies = await DataMovie.requestMovies(age);
         V.renderMovieList(movies);
       };
 
       C.start = async function () {
-        let movies = await DataMovie.requestMovies();
+        let age = activeProfile ? activeProfile.min_age : 0;
+        let movies = await DataMovie.requestMovies(age);
         let categories = await DataMovie.requestMoviesByCategory();
         V.renderNavBar(
           "C.handlerAbout()",
@@ -60,14 +62,21 @@
       };
 
       C.handlerCategory = async function (categoryName) {
-        let categories = await DataMovie.requestMoviesByCategory();
+        let age = activeProfile ? activeProfile.min_age : 0;
+        let categories = await DataMovie.requestMoviesByCategory(age);
         let movies = categories[categoryName];
-        V.renderMovieList(movies);
+        if (!movies || movies.length === 0) {
+          document.querySelector("#content").innerHTML =
+            "<p>Aucun film disponible pour votre tranche d'âge.</p>";
+        } else {
+          V.renderMovieList(movies);
+        }
       };
 
-      C.handlerSelectProfile = async function (id) {
-        activeProfile = id;
-        let movies = await DataMovie.requestMovies();
+      C.handlerSelectProfile = async function (id, min_age) {
+        activeProfile = { id, min_age: min_age };
+        let age = activeProfile.min_age;
+        let movies = await DataMovie.requestMovies(age);
         V.renderMovieList(movies);
       };
 

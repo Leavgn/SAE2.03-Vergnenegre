@@ -29,16 +29,27 @@ define("DBPWD", "Vtamalou87");
 */
 
 
-function getAllMovies(){
+function getAllMovies($age = 0){
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
     // Requête SQL pour récupérer le menu avec des paramètres
+    if ($age == 0) {
+        $sql = "SELECT Movie.id, Movie.name, Movie.image, Category.name as category
+                FROM Movie
+                JOIN Category ON Movie.id_category = Category.id
+                ORDER BY Category.name";
+        $stmt = $cnx->prepare($sql);
+    } else {
      $sql = "SELECT Movie.id, Movie.name, Movie.image, Category.name as category
             FROM Movie
             JOIN Category ON Movie.id_category = Category.id
+            WHERE Movie.min_age <= :age
             ORDER BY Category.name";
+    
     // Prépare la requête SQL
     $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':age', $age);
+    }
     // Exécute la requête SQL
     $stmt->execute();
     // Récupère les résultats de la requête sous forme d'objets
