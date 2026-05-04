@@ -50,12 +50,12 @@
           "C.handlerHome()",
           categories,
           "C.handlerProfiles()",
+          "C.handlerFavorites()",
         );
         V.renderMovieList(movies);
         let profiles = await DataProfile.read();
         V.renderProfiles(profiles);
       };
-
       C.handlerDetail = async function (id) {
         let movie = await DataMovie.requestMovieDetails(id);
         V.renderMovieDetail(movie);
@@ -85,6 +85,33 @@
         V.renderProfiles(profiles);
       };
 
+      C.handlerFavorites = async function () {
+        if (!activeProfile) {
+          alert("Veuillez sélectionner un profil pour voir vos favoris.");
+          return;
+        }
+        let movies = await DataMovie.readFavorites(activeProfile.id);
+        if (movies.length == 0) {
+          document.querySelector("#content").innerHTML =
+            "<p>Votre liste de favoris est vide.</p>";
+          return;
+        }
+        V.renderMovieList(movies);
+      };
+
+      C.handlerAddFavorite = async function (id_movie) {
+        if (!activeProfile) {
+          let reponse = await DataMovie.addFavorite(
+            id_active_profile,
+            id_movie,
+          );
+          alert("Veuillez sélectionner un profil avant d'ajouter un favori.");
+          return;
+        }
+        let result = await DataMovie.addFavorite(activeProfile.id, id_movie);
+        alert(result);
+      };
+
       // Vue (contient tout ce qui est relatif à l'affichage)
       window.V = {};
 
@@ -95,9 +122,21 @@
        * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
        * formaté par le composant NavBar.
        */
-      V.renderNavBar = function (hAbout, hHome, categories, hProfile) {
+      V.renderNavBar = function (
+        hAbout,
+        hHome,
+        categories,
+        hProfile,
+        hFavorites,
+      ) {
         let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hAbout, hHome, categories, hProfile);
+        header.innerHTML = NavBar.format(
+          hAbout,
+          hHome,
+          categories,
+          hProfile,
+          hFavorites,
+        );
       };
 
       V.renderMovieList = function (movies) {

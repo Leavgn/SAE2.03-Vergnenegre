@@ -32,4 +32,33 @@ DataMovie.requestMoviesByCategory = async function (age = 0) {
   return data;
 };
 
+DataMovie.addFavorite = async function (id_profile, id_movie) {
+  let answer = await fetch("../server/script.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `todo=addFavorite&id_profile=${id_profile}&id_movie=${id_movie}`,
+  });
+  let data = await answer.json();
+  return data;
+};
+
+DataMovie.readFavorites = async function (id_profile) {
+  let answer = await fetch(
+    "../server/script.php?todo=readFavorites&id_profile=" + id_profile,
+  );
+  let data = await answer.json();
+  return data;
+};
+
+DataMovie.isFavorite = async function (id_profile, id_movie) {
+  let answer = await fetch(
+    "../server/script.php?todo=isFavorite&id_profile=" +
+      id_profile +
+      "&id_movie=" +
+      id_movie,
+  );
+  let data = await answer.json();
+  return data;
+};
+
 export { DataMovie };

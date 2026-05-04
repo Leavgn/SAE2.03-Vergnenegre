@@ -123,3 +123,37 @@ function getProfiles() {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
+
+function addFavorite($id_profile, $id_movie){
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME.";charset=utf8", DBLOGIN, DBPWD);
+    $sql = "INSERT IGNORE INTO Favorite (id_profile, id_movie) VALUES (:id_profile, :id_movie)";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id_profile', $id_profile);
+    $stmt->bindParam(':id_movie', $id_movie);
+    $stmt->execute();
+    return $stmt->rowCount();
+}
+
+function getFavorites($id_profile) {
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME.";charset=utf8", DBLOGIN, DBPWD);
+    $sql = "SELECT Movie.id, Movie.name, Movie.image
+            FROM Favorite
+            JOIN Movie ON Favorite.id_movie = Movie.id
+            WHERE Favorite.id_profile = :id_profile";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id_profile', $id_profile);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+
+function isFavorites($id_profile, $id_movie) {
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME.";charset=utf8", DBLOGIN, DBPWD);
+    $sql = "SELECT * FROM Favorite WHERE id_profile = :id_profile AND id_movie = :id_movie";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id_profile', $id_profile);
+    $stmt->bindParam(':id_movie', $id_movie);
+    $stmt->execute();
+    
+    return $stmt->fetch(PDO::FETCH_OBJ);
+}
+    
