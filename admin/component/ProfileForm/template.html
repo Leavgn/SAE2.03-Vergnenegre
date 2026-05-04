@@ -1,6 +1,11 @@
 <div class="profile-form">
   <h3 class="profile-form__title">Ajouter un profil</h3>
   <form class="profile-form__form">
+    <input type="hidden" name="id" />
+    <select name="profile_select" onchange="C.handlerLoadProfile(this.value)">
+      <option value="">-- Nouveau profil --</option>
+      {{options}}
+    </select>
     <input required type="text" name="name" placeholder="Nom du profil" />
     <input type="text" name="avatar" placeholder="Nom du fichier avatar" />
     <select name="min_age">

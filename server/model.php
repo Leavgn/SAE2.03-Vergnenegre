@@ -14,19 +14,19 @@
  * DBPWD : Mot de passe pour se connecter à la base de données.
  */
 
-/*
+
 define("HOST", "localhost");
 define("DBNAME", "vergnenegre8");
 define("DBLOGIN", "vergnenegre8");
 define("DBPWD", "vergnenegre8");
-*/
 
 
+/*
 define("HOST", "localhost");
 define("DBNAME", "SAE203");
 define("DBLOGIN", "lea");
 define("DBPWD", "Vtamalou87");
-
+*/
 
 
 function getAllMovies($age = 0){
@@ -99,17 +99,21 @@ function getCategories() {
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 
-function addProfile($name, $avatar, $min_age) {
+function addProfile($name, $avatar, $min_age, $id = null) {
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME.";charset=utf8", DBLOGIN, DBPWD);
-    $sql = "INSERT INTO Profile (name, avatar, min_age) 
-            VALUES (:name, :avatar, :min_age)";
-    $stmt = $cnx->prepare($sql);
+    if ($id) {
+        $sql = "UPDATE Profile SET name=:name, avatar=:avatar, min_age=:min_age WHERE id=:id";
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':id', $id);
+    } else {
+        $sql = "INSERT INTO Profile (name, avatar, min_age) VALUES (:name, :avatar, :min_age)";
+        $stmt = $cnx->prepare($sql);
+    }
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':avatar', $avatar);
     $stmt->bindParam(':min_age', $min_age);
     $stmt->execute();
-    $res = $stmt->rowCount();
-    return $res;
+    return $stmt->rowCount();
 }
 
 function getProfiles() {

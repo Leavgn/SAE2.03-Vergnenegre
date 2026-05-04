@@ -24,10 +24,11 @@
 
       window.C = {};
 
-      C.start = function () {
+      C.start = async function () {
         V.renderLog("Démarrage de l'application");
         V.renderNewMovie("C.onClickAddMovie()");
-        V.renderNewProfile("C.onClickAddProfile()");
+        let profiles = await DataProfile.read();
+        V.renderNewProfile("C.onClickAddProfile()", profiles);
       };
 
       C.onClickAddMovie = async function () {
@@ -43,6 +44,39 @@
         let res = await DataProfile.add(fd);
         V.renderLog(res);
       };
+
+      C.handlerLoadProfile = async function (id) {
+        if (!id) {
+          document.querySelector('.profile-form__form input[name="id"]').value =
+            "";
+          document.querySelector(
+            '.profile-form__form input[name="name"]',
+          ).value = "";
+          document.querySelector(
+            '.profile-form__form input[name="avatar"]',
+          ).value = "";
+          document.querySelector(
+            '.profile-form__form select[name="min_age"]',
+          ).value = "";
+          return;
+        }
+        let profiles = await DataProfile.read();
+        let profile = profiles.find((p) => p.id == id);
+        if (profile) {
+          document.querySelector('.profile-form__form input[name="id"]').value =
+            profile.id;
+          document.querySelector(
+            '.profile-form__form input[name="name"]',
+          ).value = profile.name;
+          document.querySelector(
+            '.profile-form__form input[name="avatar"]',
+          ).value = profile.avatar || "";
+          document.querySelector(
+            '.profile-form__form select[name="min_age"]',
+          ).value = profile.min_age;
+        }
+      };
+
       window.V = {};
 
       V.renderLog = function (txt) {
@@ -56,9 +90,9 @@
         NewMovie.fillCategories();
       };
 
-      V.renderNewProfile = function (onClick) {
+      V.renderNewProfile = function (onClick, profiles) {
         let content = document.querySelector("#addProfile");
-        content.innerHTML = NewProfile.format(onClick);
+        content.innerHTML = NewProfile.format(onClick, profiles);
       };
 
       C.start();
