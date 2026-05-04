@@ -50,15 +50,4 @@ DataMovie.readFavorites = async function (id_profile) {
   return data;
 };
 
-DataMovie.isFavorite = async function (id_profile, id_movie) {
-  let answer = await fetch(
-    "../server/script.php?todo=isFavorite&id_profile=" +
-      id_profile +
-      "&id_movie=" +
-      id_movie,
-  );
-  let data = await answer.json();
-  return data;
-};
-
 export { DataMovie };

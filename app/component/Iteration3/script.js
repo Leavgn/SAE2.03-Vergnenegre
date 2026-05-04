@@ -5,6 +5,7 @@ let MovieDetail = {};
  
 MovieDetail.format = function (movie) {
   let html = template;
+  html = html.replace("{{id}}", movie.id);
   html = html.replace("{{name}}", movie.name);
   html = html.replace("{{name}}", movie.name);
   html = html.replace("{{image}}", movie.image);

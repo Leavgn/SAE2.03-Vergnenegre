@@ -101,10 +101,6 @@
 
       C.handlerAddFavorite = async function (id_movie) {
         if (!activeProfile) {
-          let reponse = await DataMovie.addFavorite(
-            id_active_profile,
-            id_movie,
-          );
           alert("Veuillez sélectionner un profil avant d'ajouter un favori.");
           return;
         }

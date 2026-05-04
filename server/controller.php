@@ -153,12 +153,5 @@ function readFavoritesController(){
     return getFavorites($id_profile);
 }
 
-function isFavoritesController(){
-    $id_profile = $_REQUEST['id_profile'] ?? null;
-    $id_movie = $_REQUEST['id_movie'] ?? null;
-    if ($id_profile || $id_movie) {
-        return false;
-    }
-    return isFavorites($id_profile, $id_movie);
-}
+
 
