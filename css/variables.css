@@ -2,7 +2,7 @@
 
 :root {
   /* Primitive Tokens */
-  --color-black: hsl(253, 69%, 8%);
+  --color-black: hsl(253, 20%, 2%);
   --color-white: hsl(0, 0%, 100%);
   --color-gray-light: hsl(0, 0%, 80%);
   --color-gray: hsl(0, 0%, 50%);
@@ -15,4 +15,12 @@
   /* Sementic Tokens */
   --color-fg: var(--color-white);
   --color-bg: var(--color-gray-dark);
+
+  /* Joyn green accent */
+  --color-accent-blue: hsl(170, 85%, 60%);
+  --color-accent-orange: hsl(25, 90%, 55%);
+  --color-accent-red: hsl(0, 85%, 50%);
+  --color-accent-purple: hsl(285, 45%, 65%);
+  --color-accent-darkblue: hsl(215, 45%, 25%);
+  --color-accent-green: hsl(95, 70%, 55%);
 }

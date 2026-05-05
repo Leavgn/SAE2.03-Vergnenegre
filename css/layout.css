@@ -24,6 +24,9 @@
 
 .profiles-view {
   display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;

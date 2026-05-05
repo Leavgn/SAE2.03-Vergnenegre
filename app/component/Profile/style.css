@@ -1,3 +1,7 @@
+.profiles-view {
+  background: var(--color-black);
+}
+
 .profile {
   display: flex;
   flex-direction: column;
@@ -15,17 +19,21 @@
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 8px;
-  border: 3px solid transparent;
+  border: 5px solid transparent;
   transition: border 0.2s;
 }
 
 .profile:hover .profile__avatar {
-  border: 3px solid transparent;
+  border: 5px solid var(--color-accent-blue);
+}
+
+.profile:hover .profile__name {
+  color: var(--color-accent-blue);
 }
 
 .profile__name {
   font-family: var(--ff-sans);
-  color: var(--color-black);
+  color: var(--color-white);
   font-size: 1rem;
   text-align: center;
 }
