@@ -56,9 +56,15 @@
         let profiles = await DataProfile.read();
         V.renderProfiles(profiles);
       };
+
       C.handlerDetail = async function (id) {
         let movie = await DataMovie.requestMovieDetails(id);
-        V.renderMovieDetail(movie);
+        let isFavorite = false;
+        if (activeProfile) {
+          let favs = await DataMovie.readFavorites(activeProfile.id);
+          isFavorite = favs.some((f) => f.id == id);
+        }
+        V.renderMovieDetail(movie, isFavorite);
       };
 
       C.handlerCategory = async function (categoryName) {
@@ -106,6 +112,13 @@
         }
         let result = await DataMovie.addFavorite(activeProfile.id, id_movie);
         alert(result);
+        C.handlerDetail(id_movie);
+      };
+
+      C.handlerDeleteFavorite = async function (id_movie) {
+        let result = await DataMovie.deleteFavorite(activeProfile.id, id_movie);
+        alert(result);
+        C.handlerDetail(id_movie);
       };
 
       // Vue (contient tout ce qui est relatif à l'affichage)
@@ -146,10 +159,10 @@
         content.innerHTML = html;
       };
 
-      V.renderMovieDetail = function (movie) {
+      V.renderMovieDetail = function (movie, isFavorite = false) {
         let content = document.querySelector("#content");
         content.className = "detail-view";
-        content.innerHTML = MovieDetail.format(movie);
+        content.innerHTML = MovieDetail.format(movie, isFavorite);
       };
 
       V.renderMovieByCategory = function (categories) {

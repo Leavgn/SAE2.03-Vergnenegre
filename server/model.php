@@ -146,4 +146,14 @@ function getFavorites($id_profile) {
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 
+function deleteFavorite($id_profile, $id_movie) {
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME.";charset=utf8", DBLOGIN, DBPWD);
+    $sql = "DELETE FROM Favorite WHERE id_profile = :id_profile AND id_movie = :id_movie";
+    $stmt = $cnx->prepare($sql);
+    $stmt->bindParam(':id_profile', $id_profile);
+    $stmt->bindParam(':id_movie', $id_movie);
+    $stmt->execute();
+    return $stmt->rowCount();
+}
+
  

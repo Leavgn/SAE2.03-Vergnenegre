@@ -153,5 +153,20 @@ function readFavoritesController(){
     return getFavorites($id_profile);
 }
 
-
+function deleteFavoriteController() {
+    if (isset($_REQUEST['id_profile']) == false || empty($_REQUEST['id_profile']) == true) {
+        return false;
+    }
+    if (isset($_REQUEST['id_movie']) == false || empty($_REQUEST['id_movie']) == true) {
+        return false;
+    }
+    $id_profile = $_REQUEST['id_profile'];
+    $id_movie   = $_REQUEST['id_movie'];
+    $ok = deleteFavorite($id_profile, $id_movie);
+    if ($ok != 0) {
+        return "Le film a été retiré de vos favoris.";
+    } else {
+        return false;
+    }
+}
 
