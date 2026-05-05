@@ -29,18 +29,21 @@
 
       window.C = {};
 
+      /* Affiche une alerte de présentation du projet. */
       C.handlerAbout = function () {
         alert(
           "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !",
         );
       };
 
+      /* Retourne à la liste de tous les films, filtrés selon l'âge du profil actif. */
       C.handlerHome = async function () {
         let age = activeProfile ? activeProfile.min_age : 0;
         let movies = await DataMovie.requestMovies(age);
         V.renderMovieList(movies);
       };
 
+      /* Initialise l'application : charge films, catégories et profils, puis affiche tout. */
       C.start = async function () {
         let age = activeProfile ? activeProfile.min_age : 0;
         let movies = await DataMovie.requestMovies(age);
@@ -57,6 +60,7 @@
         V.renderProfiles(profiles);
       };
 
+      /* Charge et affiche le détail d'un film. Vérifie aussi si le film est en favori du profil actif. */
       C.handlerDetail = async function (id) {
         let movie = await DataMovie.requestMovieDetails(id);
         let isFavorite = false;
@@ -67,6 +71,7 @@
         V.renderMovieDetail(movie, isFavorite);
       };
 
+      /* Affiche les films d'une catégorie donnée, filtrés selon l'âge du profil actif. */
       C.handlerCategory = async function (categoryName) {
         let age = activeProfile ? activeProfile.min_age : 0;
         let categories = await DataMovie.requestMoviesByCategory(age);
@@ -79,6 +84,7 @@
         }
       };
 
+      /* Active un profil et recharge la liste des films filtrés selon son âge. */
       C.handlerSelectProfile = async function (id, min_age) {
         activeProfile = { id, min_age: min_age };
         let age = activeProfile.min_age;
@@ -86,11 +92,13 @@
         V.renderMovieList(movies);
       };
 
+      /* Affiche la liste des profils disponibles. */
       C.handlerProfiles = async function () {
         let profiles = await DataProfile.read();
         V.renderProfiles(profiles);
       };
 
+      /* Affiche les films favoris du profil actif. Alerte si aucun profil n'est sélectionné. */
       C.handlerFavorites = async function () {
         if (!activeProfile) {
           alert("Veuillez sélectionner un profil pour voir vos favoris.");
@@ -105,6 +113,7 @@
         V.renderMovieList(movies);
       };
 
+      /* Ajoute un film aux favoris du profil actif, puis rafraîchit la page de détail. */
       C.handlerAddFavorite = async function (id_movie) {
         if (!activeProfile) {
           alert("Veuillez sélectionner un profil avant d'ajouter un favori.");
@@ -115,6 +124,7 @@
         C.handlerDetail(id_movie);
       };
 
+      /* Supprime un film des favoris du profil actif, puis rafraîchit la page de détail. */
       C.handlerDeleteFavorite = async function (id_movie) {
         let result = await DataMovie.deleteFavorite(activeProfile.id, id_movie);
         alert(result);
@@ -131,6 +141,7 @@
        * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
        * formaté par le composant NavBar.
        */
+      /* Affiche la navbar dans le header avec toutes ses actions et catégories. */
       V.renderNavBar = function (
         hAbout,
         hHome,
@@ -148,6 +159,7 @@
         );
       };
 
+      /* Affiche la liste des films en mode grille. Rend le header visible. */
       V.renderMovieList = function (movies) {
         document.querySelector("#header").hidden = false;
         let content = document.querySelector("#content");
@@ -159,12 +171,14 @@
         content.innerHTML = html;
       };
 
+      /* Affiche le détail d'un film en mode pleine page. */
       V.renderMovieDetail = function (movie, isFavorite = false) {
         let content = document.querySelector("#content");
         content.className = "detail-view";
         content.innerHTML = MovieDetail.format(movie, isFavorite);
       };
 
+      /* Affiche les films regroupés par catégorie. */
       V.renderMovieByCategory = function (categories) {
         let content = document.querySelector("#content");
         content.className = "grid-view";
@@ -175,6 +189,7 @@
         content.innerHTML = html;
       };
 
+      /* Affiche la liste des profils. Masque le header le temps de la sélection. */
       V.renderProfiles = function (profiles) {
         document.querySelector("#header").hidden = true;
         let content = document.querySelector("#content");

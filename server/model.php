@@ -14,21 +14,23 @@
  * DBPWD : Mot de passe pour se connecter à la base de données.
  */
 
-
+/*
 define("HOST", "localhost");
 define("DBNAME", "vergnenegre8");
 define("DBLOGIN", "vergnenegre8");
 define("DBPWD", "vergnenegre8");
+*/
 
 
-/*
 define("HOST", "localhost");
 define("DBNAME", "SAE203");
 define("DBLOGIN", "lea");
 define("DBPWD", "Vtamalou87");
-*/
 
 
+
+
+/* Retourne tous les films. Si $age > 0, filtre les films selon l'âge minimum. */
 function getAllMovies($age = 0){
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
@@ -57,6 +59,7 @@ function getAllMovies($age = 0){
     return $res; // Retourne les résultats
 }
 
+/* Insère un nouveau film dans la base de données avec tous ses champs. */
 function addMovie($name, $director, $year, $length, $description, $id_category, $image, $trailer, $min_age) {
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME . ";charset=utf8", DBLOGIN, DBPWD);
     $sql = "INSERT INTO Movie (name, director, year, length, description, id_category, image, trailer, min_age)
@@ -76,6 +79,7 @@ function addMovie($name, $director, $year, $length, $description, $id_category, 
     return $res;
 }
 
+/* Retourne toutes les informations d'un film à partir de son id. */
 function getMovieDetail($id) {
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME . ";charset=utf8", DBLOGIN, DBPWD);
     $sql = "SELECT Movie.id, Movie.name, Movie.year, Movie.length, Movie.description,
@@ -91,6 +95,7 @@ function getMovieDetail($id) {
     return $res;
 }
 
+/* Retourne la liste de toutes les catégories, triées par nom. */
 function getCategories() {
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
     $sql = "SELECT * FROM Category ORDER BY name";
@@ -99,6 +104,7 @@ function getCategories() {
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 
+/* Crée un nouveau profil. Si $id est fourni, met à jour le profil existant. */
 function addProfile($name, $avatar, $min_age, $id = null) {
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME.";charset=utf8", DBLOGIN, DBPWD);
     if ($id) {
@@ -116,6 +122,7 @@ function addProfile($name, $avatar, $min_age, $id = null) {
     return $stmt->rowCount();
 }
 
+/* Retourne la liste de tous les profils, triés par nom. */
 function getProfiles() {
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME.";charset=utf8", DBLOGIN, DBPWD);
     $sql = "SELECT * FROM Profile ORDER BY name";
@@ -124,6 +131,7 @@ function getProfiles() {
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 
+/* Ajoute un film aux favoris d'un profil. Ignore si le favori existe déjà. */
 function addFavorite($id_profile, $id_movie){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME.";charset=utf8", DBLOGIN, DBPWD);
     $sql = "INSERT IGNORE INTO Favorite (id_profile, id_movie) VALUES (:id_profile, :id_movie)";
@@ -134,6 +142,7 @@ function addFavorite($id_profile, $id_movie){
     return $stmt->rowCount();
 }
 
+/* Retourne la liste des films favoris d'un profil donné. */
 function getFavorites($id_profile) {
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME.";charset=utf8", DBLOGIN, DBPWD);
     $sql = "SELECT Movie.id, Movie.name, Movie.image
@@ -146,6 +155,7 @@ function getFavorites($id_profile) {
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 
+/* Supprime un film des favoris d'un profil. */
 function deleteFavorite($id_profile, $id_movie) {
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME.";charset=utf8", DBLOGIN, DBPWD);
     $sql = "DELETE FROM Favorite WHERE id_profile = :id_profile AND id_movie = :id_movie";

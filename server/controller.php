@@ -20,7 +20,7 @@
  */
 require("model.php");
 
-/*Cette fonction permet de récupérer tous les films filtrés par âge du profil*/ 
+/* Retourne tous les films, filtrés par âge si le paramètre 'age' est fourni. */
 function readMoviesController(){
 /*Si aucun age n'est spécifié (age = 0) alors tous les films sont renvoyés*/ 
     $age = isset($_REQUEST['age']) ? $_REQUEST['age'] : 0;
@@ -32,6 +32,7 @@ function readMoviesController(){
     return $movies;
 }
 
+/* Vérifie que tous les champs du film sont présents, puis insère le film en BDD. */
 function addMovieController(){
 
    
@@ -83,6 +84,7 @@ function addMovieController(){
     }
 }
 
+/* Retourne le détail complet d'un film à partir de son 'id'. */
 function readMovieDetailController() {
     if ( isset($_REQUEST['id'])==false || empty($_REQUEST['id'])==true ) {
         return false;
@@ -92,6 +94,7 @@ function readMovieDetailController() {
     return $movie;
 }
 
+/* Retourne les films regroupés par catégorie (tableau associatif). */
 function readMoviesByCategoryController(){
     $age = isset($_REQUEST['age']) ? $_REQUEST['age'] : 0;
     $movies = getAllMovies($age);
@@ -102,10 +105,12 @@ function readMoviesByCategoryController(){
     return $categories;
 }
 
+/* Retourne la liste de toutes les catégories. */
 function readCategoriesController() {
     return getCategories();
 }
 
+/* Crée un profil, ou le met à jour si un 'id' est fourni. */
 function addProfileController() {
     if (isset($_REQUEST['name']) == false || empty($_REQUEST['name']) == true) {
         return false;
@@ -123,11 +128,12 @@ function addProfileController() {
     }
 }
 
+/* Retourne la liste de tous les profils. */
 function readProfilesController() {
     return getProfiles();
 }
 
-
+/* Ajoute un film aux favoris d'un profil. Retourne un message selon si c'est un doublon ou non. */
 function addFavoriteController(){
     if (isset($_REQUEST['id_profile']) == false || empty($_REQUEST['id_profile']) == true) {
         return false;
@@ -145,6 +151,7 @@ function addFavoriteController(){
     }
 }
 
+/* Retourne les films favoris d'un profil donné. */
 function readFavoritesController(){
     if (isset($_REQUEST['id_profile']) == false || empty($_REQUEST['id_profile']) == true) {
         return false;
@@ -153,6 +160,7 @@ function readFavoritesController(){
     return getFavorites($id_profile);
 }
 
+/* Supprime un film des favoris d'un profil. */
 function deleteFavoriteController() {
     if (isset($_REQUEST['id_profile']) == false || empty($_REQUEST['id_profile']) == true) {
         return false;

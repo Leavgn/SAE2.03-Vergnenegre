@@ -3,6 +3,7 @@ let HOST_URL = "https://mmi.unilim.fr/~vergnenegre8/SAE2.03-Vergnenegre"; //"htt
 
 let DataMovie = {};
 
+/* Récupère tous les films. Si age > 0, filtre selon l'âge minimum du profil actif. */
 DataMovie.requestMovies = async function (age = 0) {
   // fetch permet d'envoyer une requête HTTP à l'URL spécifiée.
   // L'URL est construite en concaténant HOST_URL à "/server/script.php?direction=" et la valeur de la variable dir.
@@ -16,6 +17,7 @@ DataMovie.requestMovies = async function (age = 0) {
   return data;
 };
 
+/* Récupère le détail complet d'un film à partir de son id. */
 DataMovie.requestMovieDetails = async function (id) {
   let answer = await fetch(
     "../server/script.php?todo=readMovieDetail&id=" + id,
@@ -24,6 +26,7 @@ DataMovie.requestMovieDetails = async function (id) {
   return data;
 };
 
+/* Récupère les films regroupés par catégorie. Si age > 0, filtre selon l'âge du profil. */
 DataMovie.requestMoviesByCategory = async function (age = 0) {
   let answer = await fetch(
     "../server/script.php?todo=readMoviesByCategory&age=" + age,
@@ -32,6 +35,7 @@ DataMovie.requestMoviesByCategory = async function (age = 0) {
   return data;
 };
 
+/* Ajoute un film aux favoris d'un profil via une requête POST. */
 DataMovie.addFavorite = async function (id_profile, id_movie) {
   let answer = await fetch("../server/script.php", {
     method: "POST",
@@ -42,6 +46,7 @@ DataMovie.addFavorite = async function (id_profile, id_movie) {
   return data;
 };
 
+/* Récupère la liste des films favoris d'un profil donné. */
 DataMovie.readFavorites = async function (id_profile) {
   let answer = await fetch(
     "../server/script.php?todo=readFavorites&id_profile=" + id_profile,
@@ -50,6 +55,7 @@ DataMovie.readFavorites = async function (id_profile) {
   return data;
 };
 
+/* Supprime un film des favoris d'un profil via une requête POST. */
 DataMovie.deleteFavorite = async function (id_profile, id_movie) {
   let answer = await fetch("../server/script.php", {
     method: "POST",

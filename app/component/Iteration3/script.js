@@ -3,8 +3,10 @@ let template = await templateFile.text();
 
 let MovieDetail = {};
 
+/* Retourne le HTML du détail d'un film. Injecte un bouton favori adapté selon isFavorite. */
 MovieDetail.format = function (movie, isFavorite) {
   let html = template;
+  // Remplacement des placeholders du template par les données du film
   html = html.replace("{{id}}", movie.id);
   html = html.replace("{{name}}", movie.name);
   html = html.replace("{{name}}", movie.name);
@@ -16,6 +18,7 @@ MovieDetail.format = function (movie, isFavorite) {
   html = html.replace("{{category}}", movie.category);
   html = html.replace("{{description}}", movie.description);
   html = html.replace("{{trailer}}", movie.trailer);
+  // Bouton différent selon si le film est déjà en favori ou non
   if (isFavorite) {
     html = html.replace(
       "{{favoriteBtn}}",

@@ -52,6 +52,7 @@ if ( isset($_REQUEST['todo']) ){
 
   // Récupère la valeur du paramètre 'todo' dans le tableau $_REQUEST
   // $_REQUEST est une superglobale qui contient les paramètres de la requête HTTP.
+  /* Dispatch : appelle le contrôleur correspondant à la valeur de 'todo'. */
   $todo = $_REQUEST['todo'];
 
   // en fonction de la valeur de 'todo', on appelle la fonction de contrôle appropriée
@@ -116,6 +117,8 @@ if ( isset($_REQUEST['todo']) ){
    * Si la fonction de contrôleur retourne false, on renvoie une réponse JSON avec un message d'erreur 
    * et un code de réponse HTTP 500 (Internal error), puis termine l'exécution du script (exit()).
    */
+
+  /* Si le contrôleur retourne false, une erreur s'est produite côté serveur. */
   if ($data===false){
     echo json_encode('[error] Controller returns false');
     http_response_code(500); // 500 == "Internal error"
@@ -127,6 +130,8 @@ if ( isset($_REQUEST['todo']) ){
    * par la fonction de contrôleur et encodées en JSON (json_encode).
    * On renvoie aussi un code de réponse HTTP 200 (OK) pour indiquer que la requête a été traitée avec succès.
    */
+
+   /* Tout s'est bien passé : on renvoie les données en JSON. */
   echo json_encode($data);
   http_response_code(200); // 200 == "OK"
   exit();
