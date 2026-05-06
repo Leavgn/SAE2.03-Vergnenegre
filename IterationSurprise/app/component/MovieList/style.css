@@ -29,7 +29,7 @@
   /* Dégradé violet qui part du bas (0%) et s'estompe vers le haut (70%) */
   background: linear-gradient(
     to top,
-    var(--color-accent-purple) 0%,
+    var(--color-accent-blue) 0%,
     transparent 70%
   );
   z-index: 1;

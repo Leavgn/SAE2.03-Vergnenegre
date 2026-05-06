@@ -23,6 +23,7 @@
     scroll-snap-type: x mandatory;
   }
 }
+
 .detail-view {
   display: block;
   padding: 0;
