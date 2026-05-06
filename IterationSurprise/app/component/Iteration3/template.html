@@ -1,22 +1,28 @@
 <div class="movieDetail">
-  <div class="movieDetail__poster">
+  <div class="movieDetail__hero">
     <img
-      class="movieDetail__img"
+      class="movieDetail__hero-img"
       src="../server/images/{{image}}"
       alt="Affiche du film {{name}}"
     />
+    <div class="movieDetail__hero-overlay"></div>
+    <div class="movieDetail__hero-content">
+      <h1 class="movieDetail__title">{{name}}</h1>
+      <div class="movieDetail__meta">
+        <p class="movieDetail__director">Réalisateur : {{director}}</p>
+        <p class="movieDetail__year">Année de sortie : {{year}}</p>
+        <p class="movieDetail__length">Durée du film en minutes : {{length}}</p>
+        <p class="movieDetail__age">Âge minimum : {{min_age}}</p>
+        <p class="movieDetail__category">Catégorie : {{category}}</p>
+        {{favoriteBtn}}
+      </div>
+    </div>
   </div>
+
   <div class="movieDetail__info">
-    <h1 class="movieDetail__title">{{name}}</h1>
-    <p class="movieDetail__director">Réalisateur : {{director}}</p>
-    <p class="movieDetail__year">Année de sortie : {{year}}</p>
-    <p class="movieDetail__length">Durée du film en minutes : {{length}}</p>
-    <p class="movieDetail__age">Âge minimum : {{min_age}}</p>
-    <p class="movieDetail__category">Catégorie : {{category}}</p>
     <p class="movieDetail__description">Description : {{description}}</p>
     <div class="movieDetail__trailer">
       <iframe src="{{trailer}}"></iframe>
     </div>
-    {{favoriteBtn}}
   </div>
 </div>
