@@ -37,6 +37,8 @@ li {
 
 /* Set core body defaults */
 body {
+  font-family: var(--ff-sans);
+  background-color: var(--color-black);
   min-height: 100vh;
   line-height: 1.5;
   margin: 0;

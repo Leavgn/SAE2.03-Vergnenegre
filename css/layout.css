@@ -25,7 +25,7 @@
 .profiles-view {
   display: flex;
   flex-direction: column;
-  background: var(--color-bg);
+  background: var(--color-white);
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

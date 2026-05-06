@@ -37,7 +37,10 @@ li {
 
 /* Set core body defaults */
 body {
+  font-family: var(--ff-sans);
+
   min-height: 100vh;
+
   line-height: 1.5;
   margin: 0;
   padding: 0;

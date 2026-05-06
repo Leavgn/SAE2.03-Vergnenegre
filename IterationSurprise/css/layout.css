@@ -1,5 +1,5 @@
 .grid-view {
-  background-color: var(--color-bg);
+  background-color: var(--color-black);
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 220px;
@@ -34,7 +34,7 @@
 .profiles-view {
   display: flex;
   flex-direction: column;
-  background: var(--color-bg);
+  background: var(--color-black);
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

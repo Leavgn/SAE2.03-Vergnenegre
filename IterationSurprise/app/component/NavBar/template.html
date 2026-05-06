@@ -1,16 +1,76 @@
 <nav class="navbar font-sans">
   <ul class="navbar__list">
-    <li class="navbar__item" onclick="{{hHome}}">Accueil</li>
-
-    <li class="navbar__item navbar__dropdown">
+    <li class="navbar__item" onclick="C.setActiveNav(event); {{hHome}}">
+      Accueil
+    </li>
+    <li class="navbar__item navbar__dropdown" onclick="C.setActiveNav(event)">
       Catégories
       <ul class="navbar__dropdown-list">
         {{categories}}
       </ul>
     </li>
-    <li class="navbar__item" onclick="{{hFavorites}}">Mes favoris</li>
-    <li class="navbar__item navbar__item-profile" onclick="{{hProfile}}">
+    <li class="navbar__item" onclick="C.setActiveNav(event); {{hFavorites}}">
+      Mes favoris
+    </li>
+    <li
+      class="navbar__item navbar__item-profile"
+      onclick="C.setActiveNav(event); {{hProfile}}"
+    >
       Changer de profil
     </li>
   </ul>
+
+  <button class="navbar__burger" id="navbar-burger">
+    <svg viewBox="0 0 32 32" width="28" height="28" class="burger__svg">
+      <line
+        class="burger__line"
+        x1="2"
+        y1="7"
+        x2="30"
+        y2="7"
+        stroke="currentColor"
+        stroke-width="3"
+        stroke-linecap="round"
+      />
+      <line
+        class="burger__line"
+        x1="2"
+        y1="16"
+        x2="30"
+        y2="16"
+        stroke="currentColor"
+        stroke-width="3"
+        stroke-linecap="round"
+      />
+      <line
+        class="burger__line"
+        x1="2"
+        y1="25"
+        x2="30"
+        y2="25"
+        stroke="currentColor"
+        stroke-width="3"
+        stroke-linecap="round"
+      />
+    </svg>
+  </button>
 </nav>
+
+<div class="navbar__mobile-menu" id="navbar-mobile-menu">
+  <button class="navbar__mobile-close" id="navbar-mobile-close">✕</button>
+  <span class="navbar__mobile-item" onclick="C.setActiveNav(event); {{hHome}}"
+    >Accueil</span
+  >
+  <span class="navbar__mobile-item">Catégories</span>
+  <div class="navbar__mobile-categories">{{mobile_categories}}</div>
+  <span
+    class="navbar__mobile-item"
+    onclick="C.setActiveNav(event); {{hFavorites}}"
+    >Mes favoris</span
+  >
+  <span
+    class="navbar__mobile-item"
+    onclick="C.setActiveNav(event); {{hProfile}}"
+    >Changer de profil</span
+  >
+</div>

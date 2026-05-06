@@ -5,6 +5,7 @@
   scroll-snap-align: start;
   border-radius: 0.5rem;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .movie-card__affiche {

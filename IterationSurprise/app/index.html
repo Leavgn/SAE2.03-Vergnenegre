@@ -71,8 +71,22 @@
         V.renderMovieDetail(movie, isFavorite);
       };
 
+      C.setActiveNav = function (event) {
+        let items = document.querySelectorAll(".navbar__item");
+        for (let item of items) {
+          item.classList.remove("navbar__item--active");
+        }
+        event.currentTarget.classList.add("navbar__item--active");
+      };
+
       /* Affiche les films d'une catégorie donnée, filtrés selon l'âge du profil actif. */
       C.handlerCategory = async function (categoryName) {
+        let items = document.querySelectorAll(".navbar__item");
+        for (let item of items) {
+          item.classList.remove("navbar__item--active");
+        }
+        let dropdown = document.querySelector(".navbar__dropdown");
+        if (dropdown) dropdown.classList.add("navbar__item--active");
         let age = activeProfile ? activeProfile.min_age : 0;
         let categories = await DataMovie.requestMoviesByCategory(age);
         let movies = categories[categoryName];
@@ -157,6 +171,7 @@
           hProfile,
           hFavorites,
         );
+        NavBar.initBurger();
       };
 
       /* Affiche la liste des films en mode grille. Rend le header visible. */
