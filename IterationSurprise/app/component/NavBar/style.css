@@ -190,4 +190,8 @@
   .navbar__burger {
     display: none;
   }
+
+  .navbar__item {
+    font-size: 1.25rem;
+  }
 }
