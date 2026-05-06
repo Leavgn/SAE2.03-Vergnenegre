@@ -1,0 +1,16 @@
+<nav class="navbar font-sans">
+  <ul class="navbar__list">
+    <li class="navbar__item" onclick="{{hHome}}">Accueil</li>
+
+    <li class="navbar__item navbar__dropdown">
+      Catégories
+      <ul class="navbar__dropdown-list">
+        {{categories}}
+      </ul>
+    </li>
+    <li class="navbar__item" onclick="{{hFavorites}}">Mes favoris</li>
+    <li class="navbar__item navbar__item-profile" onclick="{{hProfile}}">
+      Changer de profil
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <title>SAE2.03 ADMIN</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/base.css" />
+  </head>
+  <body>
+    <nav>
+      <h1>BACK OFFICE</h1>
+    </nav>
+
+    <!-- Zones d'affichage des composants.-->
+    <section id="log"></section>
+    <section id="addMovie"></section>
+    <section id="addProfile"></section>
+
+    <script type="module">
+      /* Import des <composants*/
+      import { NewMovie } from "./component/AddMovie/script.js";
+      import { DataMovie } from "./data/DataMovie.js";
+      import { Log } from "./component/Log/script.js";
+      import { NewProfile } from "./component/ProfileForm/script.js";
+      import { DataProfile } from "./data/DataProfile.js";
+
+      window.C = {};
+
+      /* Initialise l'application : affiche les composants et charge les données initiales. */
+      C.start = async function () {
+        V.renderLog("Démarrage de l'application");
+        V.renderNewMovie("C.onClickAddMovie()");
+        let profiles = await DataProfile.read();
+        V.renderNewProfile("C.onClickAddProfile()", profiles);
+      };
+
+      /* Récupère les données du formulaire film et les envoie à l'API, puis affiche la réponse dans le log. */
+      C.onClickAddMovie = async function () {
+        let form = document.querySelector(".addMovie__form");
+        let fd = new FormData(form);
+        let res = await DataMovie.add(fd);
+        V.renderLog(res);
+      };
+
+      /* Récupère les données du formulaire profil et les envoie à l'API, puis affiche la réponse dans le log. */
+      C.onClickAddProfile = async function () {
+        let form = document.querySelector(".profile-form__form");
+        let fd = new FormData(form);
+        let res = await DataProfile.add(fd);
+        V.renderLog(res);
+      };
+
+      /* Charge les données d'un profil existant dans le formulaire pour le modifier.
+         Si id est vide (option "nouveau profil"), réinitialise tous les champs. */
+      C.handlerLoadProfile = async function (id) {
+        if (!id) {
+          document.querySelector('.profile-form__form input[name="id"]').value =
+            "";
+          document.querySelector(
+            '.profile-form__form input[name="name"]',
+          ).value = "";
+          document.querySelector(
+            '.profile-form__form input[name="avatar"]',
+          ).value = "";
+          document.querySelector(
+            '.profile-form__form select[name="min_age"]',
+          ).value = "";
+          return;
+        }
+        let profiles = await DataProfile.read();
+        let profile = profiles.find((p) => p.id == id);
+        if (profile) {
+          document.querySelector('.profile-form__form input[name="id"]').value =
+            profile.id;
+          document.querySelector(
+            '.profile-form__form input[name="name"]',
+          ).value = profile.name;
+          document.querySelector(
+            '.profile-form__form input[name="avatar"]',
+          ).value = profile.avatar || "";
+          document.querySelector(
+            '.profile-form__form select[name="min_age"]',
+          ).value = profile.min_age;
+        }
+      };
+
+      window.V = {};
+
+      /* Affiche un nouveau message dans la zone de log. */
+      V.renderLog = function (txt) {
+        let content = document.querySelector("#log");
+        content.innerHTML = Log.format(txt);
+      };
+
+      /* Affiche le formulaire d'ajout de film et charge les catégories dans le <select>. */
+      V.renderNewMovie = function (onClick) {
+        let content = document.querySelector("#addMovie");
+        content.innerHTML = NewMovie.format(onClick);
+        NewMovie.fillCategories();
+      };
+
+      /* Affiche le formulaire de profil avec la liste des profils existants. */
+      V.renderNewProfile = function (onClick, profiles) {
+        let content = document.querySelector("#addProfile");
+        content.innerHTML = NewProfile.format(onClick, profiles);
+      };
+
+      C.start();
+    </script>
+  </body>
+</html>

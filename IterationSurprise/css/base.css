@@ -1,0 +1,12 @@
+@layer reset, variables, utilities, components;
+
+@import "./reset.css" layer(reset);
+@import "./variables.css" layer(variables);
+@import "./utilities.css" layer(utilities);
+@import "./layout.css" layer(utilities);
+
+@import "../app/component/NavBar/style.css" layer(components);
+@import "../app/component/MovieList/style.css" layer(components);
+@import "../app/component/Iteration3/style.css" layer(components);
+@import "../app/component/Profile/style.css" layer(components);
+@import "../admin/component/Log/style.css" layer(components);

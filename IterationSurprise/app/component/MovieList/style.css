@@ -1,0 +1,75 @@
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  scroll-snap-align: start;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.movie-card__affiche {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border: none;
+  display: block;
+  border-radius: 0.5rem;
+}
+
+.movie-card__poster {
+  position: relative;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.movie-card__overlay {
+  position: absolute;
+  inset: 0; /* Prend 100% de la hauteur et largeur du poster */
+  /* Dégradé violet qui part du bas (0%) et s'estompe vers le haut (70%) */
+  background: linear-gradient(
+    to top,
+    var(--color-accent-purple) 0%,
+    transparent 70%
+  );
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none; /* Pour pouvoir cliquer sur l'image à travers l'overlay */
+}
+
+.movie-card__title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  font-family: var(--ff-sans);
+  font-size: 0.7rem;
+  padding: 1.5rem 0.6rem 0.6rem;
+  background: linear-gradient(transparent, var(--color-black));
+  color: var(--color-white);
+  border-radius: 0.5rem;
+  text-align: left;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.movie-card__name {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+@media (width > 40rem) {
+  .movie-card__title {
+    font-size: 1rem;
+    padding: 2rem 0.8rem 0.8rem;
+  }
+  .movie-card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+  }
+  .movie-card:hover .movie-card__overlay {
+    opacity: 1;
+  }
+}

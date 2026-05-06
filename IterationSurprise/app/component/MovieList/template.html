@@ -1,0 +1,16 @@
+<div class="movie-card">
+  <div class="movie-card__poster">
+    <img
+      class="movie-card__affiche"
+      src="../server/images/{{image}}"
+      alt="Affiche du film {{name}}"
+      onclick="C.handlerDetail('{{id}}')"
+    />
+    <div class="movie-card__overlay"></div>
+  </div>
+  <div class="movie-card__info">
+    <h2 class="movie-card__title" onclick="C.handlerDetail('{{id}}')">
+      {{name}}
+    </h2>
+  </div>
+</div>
