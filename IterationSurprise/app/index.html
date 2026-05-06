@@ -39,8 +39,8 @@
       /* Retourne à la liste de tous les films, filtrés selon l'âge du profil actif. */
       C.handlerHome = async function () {
         let age = activeProfile ? activeProfile.min_age : 0;
-        let movies = await DataMovie.requestMovies(age);
-        V.renderMovieList(movies);
+        let categories = await DataMovie.requestMoviesByCategory(age);
+        V.renderMovieByCategory(categories);
       };
 
       /* Initialise l'application : charge films, catégories et profils, puis affiche tout. */
@@ -55,7 +55,7 @@
           "C.handlerProfiles()",
           "C.handlerFavorites()",
         );
-        V.renderMovieList(movies);
+        V.renderMovieByCategory(categories);
         let profiles = await DataProfile.read();
         V.renderProfiles(profiles);
       };
@@ -102,8 +102,15 @@
       C.handlerSelectProfile = async function (id, min_age) {
         activeProfile = { id, min_age: min_age };
         let age = activeProfile.min_age;
-        let movies = await DataMovie.requestMovies(age);
-        V.renderMovieList(movies);
+        let categories = await DataMovie.requestMoviesByCategory(min_age);
+        V.renderNavBar(
+          "C.handlerAbout()",
+          "C.handlerHome()",
+          categories,
+          "C.handlerProfiles()",
+          "C.handlerFavorites()",
+        );
+        V.renderMovieByCategory(categories);
       };
 
       /* Affiche la liste des profils disponibles. */
@@ -195,8 +202,9 @@
 
       /* Affiche les films regroupés par catégorie. */
       V.renderMovieByCategory = function (categories) {
+        document.querySelector("#header").hidden = false;
         let content = document.querySelector("#content");
-        content.className = "grid-view";
+        content.className = "categories-view";
         let html = "";
         for (const [categoryName, movies] of Object.entries(categories)) {
           html += MovieCategory.format(categoryName, movies);

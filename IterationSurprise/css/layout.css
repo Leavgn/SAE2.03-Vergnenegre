@@ -11,16 +11,36 @@
   scrollbar-width: none;
 }
 
+.categories-view {
+  background-color: var(--color-black);
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding: 2rem 0;
+}
+
+.movie-category__title {
+  color: var(--color-white);
+  font-size: 1.25rem;
+  font-weight: 300;
+  padding-left: 1.5rem;
+}
+
+.movie-category {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
 @media (width > 40rem) {
   .grid-view {
-    width: 100%;
-    display: grid;
-    grid-auto-flow: column;
     grid-auto-columns: 220px;
     gap: 1rem;
-    padding: 2rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    padding: 1rem 2rem;
+  }
+
+  .movie-category__title {
+    font-size: 1.5rem;
   }
 }
 
