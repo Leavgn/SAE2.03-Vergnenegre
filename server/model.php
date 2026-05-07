@@ -14,26 +14,26 @@
  * DBPWD : Mot de passe pour se connecter à la base de données.
  */
 
-
+/*
 define("HOST", "localhost");
 define("DBNAME", "vergnenegre8");
 define("DBLOGIN", "vergnenegre8");
 define("DBPWD", "vergnenegre8");
+*/
 
 
-/*
 define("HOST", "localhost");
 define("DBNAME", "SAE203");
 define("DBLOGIN", "lea");
 define("DBPWD", "Vtamalou87");
-*/
+
 
 
 
 /* Retourne tous les films. Si $age > 0, filtre les films selon l'âge minimum. */
 function getAllMovies($age = 0){
     // Connexion à la base de données
-    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME.";charset=utf8", DBLOGIN, DBPWD);
     // Requête SQL pour récupérer le menu avec des paramètres
     if ($age == 0) {
         $sql = "SELECT Movie.id, Movie.name, Movie.image, Category.name as category

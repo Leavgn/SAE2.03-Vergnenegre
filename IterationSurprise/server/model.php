@@ -33,7 +33,7 @@ define("DBPWD", "Vtamalou87");
 /* Retourne tous les films. Si $age > 0, filtre les films selon l'âge minimum. */
 function getAllMovies($age = 0){
     // Connexion à la base de données
-    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME.";charset=utf8", DBLOGIN, DBPWD);
     // Requête SQL pour récupérer le menu avec des paramètres
     if ($age == 0) {
         $sql = "SELECT Movie.id, Movie.name, Movie.image, Category.name as category
